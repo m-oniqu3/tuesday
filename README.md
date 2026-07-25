@@ -29,3 +29,7 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 - react router 
 
 
+#### now
+- setup react router
+- setup layout file
+- public & private auth
