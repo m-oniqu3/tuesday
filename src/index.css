@@ -39,7 +39,7 @@ body {
   }
 
   .input {
-    @apply w-full bg-[#F5F4F2] px-3 py-3 font-medium rounded-lg focus:outline-none text-neutral-800 placeholder:text-xs;
+    @apply w-full bg-[#F5F4F2] px-3 py-3 font-medium rounded-lg focus:outline-none text-neutral-800 text-xs placeholder:text-xs;
     font-size: var(--text-small);
   }
 
@@ -50,5 +50,5 @@ body {
 
 
 @utility no-scrollbar {
-  @apply [scrollbar-width:none] [&::-webkit-scrollbar]:hidden;
+  @apply scrollbar-none [&::-webkit-scrollbar]:hidden;
 }

@@ -9,7 +9,7 @@ export const CreateListSchema = z.object({
     .min(3, "Description should be at least 3 characters")
     .optional()
     .or(z.literal("")),
-  private: z.boolean().optional(),
+  isPrivate: z.boolean().optional(),
 });
 
 export type CreateList = z.infer<typeof CreateListSchema>;
