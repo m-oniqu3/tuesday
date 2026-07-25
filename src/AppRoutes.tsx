@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router";
 import Auth from "./components/Auth";
 import GuestRoute from "./components/auth/GuestRoute";
-import ProtectedRoute from "./components/auth/ProtectedRoute";
 import AuthLayout from "./layouts/AuthLayout";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
@@ -17,11 +16,11 @@ function AppRoutes() {
       </Route>
 
       {/* Auth required */}
-      <Route element={<ProtectedRoute />}>
-        <Route element={<RootLayout />}>
-          <Route index element={<Home />} />
-        </Route>
+      {/* <Route element={<ProtectedRoute />}> */}
+      <Route element={<RootLayout />}>
+        <Route index element={<Home />} />
       </Route>
+      {/* </Route> */}
     </Routes>
   );
 }
