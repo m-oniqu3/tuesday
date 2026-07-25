@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { LoadingIcon } from "../../utils/icons";
 import {
   CreateListSchema,
@@ -34,6 +35,7 @@ function CreateList() {
       if (!user) return;
 
       await createList(user.uid, input);
+      toast.success("List created");
 
       closeModal();
     } catch (error) {
@@ -41,6 +43,8 @@ function CreateList() {
       form.setError("root", {
         message: "Something went wrong creating your list.",
       });
+
+      toast.error("Failed to create list");
     }
   }
   return (
