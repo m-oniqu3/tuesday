@@ -5,11 +5,18 @@ import {
 } from "@heroicons/react/24/outline";
 import { FilmIcon } from "@heroicons/react/24/solid";
 import { useAuth } from "../../hook/useAuth";
+import { useModal } from "../../hook/useModal";
+import { ModalType } from "../../types/modal";
 import Button from "../Button";
 import Searchbar from "./Searchbar";
 
 function AuthNav() {
   const { user } = useAuth();
+  const { openModal } = useModal();
+
+  function handleCreateListModal() {
+    openModal(ModalType.CREATE_LIST);
+  }
 
   return (
     <header className=" h-16">
@@ -20,7 +27,11 @@ function AuthNav() {
 
         <Bars4Icon className="size-5 lg:hidden" />
         <div className="hidden lg:flex items-center gap-4">
-          <Button type="button" className="bg-[#991b1b] text-white">
+          <Button
+            type="button"
+            className="bg-[#991b1b] text-white"
+            onClick={handleCreateListModal}
+          >
             Create
           </Button>
           <BookmarkIcon className="size-4" />
