@@ -1,5 +1,11 @@
-import { GoogleAuthProvider, signInWithPopup, type User } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  signOut,
+  type User,
+} from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
+import { generateUsername } from "../../utils/generate-username";
 import { auth, db } from "../lib/firebase";
 
 const provider = new GoogleAuthProvider();
@@ -24,10 +30,14 @@ async function createUserProfile(user: User) {
 
   if (!snapshot.exists()) {
     await setDoc(userRef, {
-      username: user.displayName,
+      username: generateUsername(user),
       email: user.email,
       avatar: user.photoURL,
       createdAt: new Date(),
     });
   }
+}
+
+export async function logout() {
+  await signOut(auth);
 }
