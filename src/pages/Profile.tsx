@@ -12,14 +12,11 @@ function Profile() {
 
   const { data: profile, isLoading, error } = useUserProfile(username);
 
-  const { data: lists, isLoading: isProfileLoading } = useUserLists(
-    profile?.id,
-    user?.uid,
-  );
+  const { data: lists } = useUserLists(profile?.id, user?.uid);
 
   // const isOwner = user?.uid === profile?.id;
 
-  if (isLoading || isProfileLoading) {
+  if (isLoading) {
     return <p>Loading...</p>;
   }
 

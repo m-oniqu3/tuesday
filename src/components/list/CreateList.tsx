@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
+import { getErrorMessage } from "../../../utils/getErrorMessage";
 import {
   CreateListSchema,
   type CreateList,
@@ -14,6 +15,10 @@ function CreateList() {
   const { stopPropagation, closeModal } = useModal();
 
   const createListMutation = useCreateList(user?.uid);
+
+  const errorMessage = createListMutation.error
+    ? getErrorMessage(createListMutation.error)
+    : null;
 
   const form = useForm<CreateList>({
     resolver: zodResolver(CreateListSchema),
@@ -45,6 +50,8 @@ function CreateList() {
     >
       <header className="flex flex-col gap-4">
         <p className="text-xs text-center">Create List</p>
+
+        {errorMessage && <p className="text-sm text-red-600">{errorMessage}</p>}
         {/* 
         {collectionPayload?.film && (
           <p className="text-sm p-2 rounded-xl bg-red-700 text-white font-medium">

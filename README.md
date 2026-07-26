@@ -44,6 +44,7 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 - sort lists 
 - sort films in list 
 - add colour scheme
+- add views ; grid view and list view 
 
 ### alt project name
 mancy - from archer

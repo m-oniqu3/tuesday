@@ -7,9 +7,12 @@ import {
   serverTimestamp,
   where,
 } from "firebase/firestore";
+import { AppError } from "../../utils/AppError";
 import { createSlug } from "../../utils/createSlug";
+import { ERROR_CODES } from "../constants/errorCodes";
 import { db } from "../lib/firebase";
 import type { CreateListInput, List } from "../types/list";
+import { listExists } from "./list-exists";
 
 // export async function getUserLists(
 //   profileId: string,
@@ -52,6 +55,12 @@ export async function getUserLists(
 
   const constraints = [where("userId", "==", profileId)];
 
+  console.log({
+    profileId,
+    viewerId,
+    isOwner,
+  });
+
   if (!isOwner) {
     constraints.push(where("private", "==", false));
   }
@@ -67,25 +76,25 @@ export async function getUserLists(
 }
 
 export async function createList(userId: string, input: CreateListInput) {
-  const lists = await getUserLists(userId, userId);
+  const exists = await listExists(userId, input.name);
 
-  const nextOrder = lists.length;
+  if (exists) {
+    throw new AppError(
+      "You already have a list with this name",
+      ERROR_CODES.DUPLICATE_LIST,
+    );
+  }
 
   const listsRef = collection(db, "lists");
 
-  const slug = createSlug(input.name);
-
-  console.log({
-    auth: userId,
-    input,
-  });
+  const normalizedName = input.name.trim().toLowerCase();
 
   const docRef = await addDoc(listsRef, {
-    name: input.name,
-    slug,
-    description: input.description ?? "",
+    name: input.name.trim(),
+    normalizedName,
+    slug: createSlug(input.name),
+    description: input.description?.trim() ?? "",
     private: input.isPrivate ?? false,
-    order: nextOrder,
     userId,
     filmsCount: 0,
     createdAt: serverTimestamp(),
@@ -93,7 +102,6 @@ export async function createList(userId: string, input: CreateListInput) {
 
   return docRef.id;
 }
-
 export async function getListBySlug(
   userId: string,
   slug: string,
