@@ -25,3 +25,16 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 
 #### now
 - list page
+
+
+### version 1
+use omdb api to fetch data
+
+
+### version 2
+add extension to scrape data from netflix and save to create list
+
+### alt project name
+mancy - from archer
+volcano - the colour
+critics - discussion platform

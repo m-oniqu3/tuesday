@@ -39,6 +39,7 @@ export async function createList(userId: string, input: CreateListInput) {
     private: input.isPrivate ?? false,
     order: nextOrder,
     userId,
+    filmsCount: 0,
     createdAt: serverTimestamp(),
   });
 
@@ -74,6 +75,7 @@ export async function getListBySlug(
     private: data.private,
     userId: data.userId,
     order: data.order,
+    filmsCount: data.filmsCount,
     createdAt: data.createdAt,
   };
 }

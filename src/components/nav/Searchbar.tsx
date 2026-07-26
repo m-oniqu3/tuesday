@@ -1,10 +1,11 @@
+import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { FilmIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
 
 function Searchbar() {
   const [search, setSearch] = useState("");
   return (
-    <form className="grid grid-cols-[40px_auto_40px]">
+    <form className="grid grid-cols-[45px_auto_45px]">
       <div className="gray flex-center rounded-l-2xl">
         <FilmIcon className="size-4.5 text-neutral-400" />
       </div>
@@ -22,7 +23,11 @@ function Searchbar() {
         onClick={() => setSearch("")}
         className="gray pr-4 flex-center rounded-r-2xl cursor-pointer"
       >
-        {search && <XMarkIcon className="size-4.5 text-neutral-400" />}
+        {!search ? (
+          <MagnifyingGlassIcon className="size-4" />
+        ) : (
+          <XMarkIcon className="size-4.5 text-neutral-400" />
+        )}
       </button>
     </form>
   );

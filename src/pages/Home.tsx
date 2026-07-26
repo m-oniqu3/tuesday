@@ -13,9 +13,9 @@ function Home() {
     }
   }
   return (
-    <div>
+    <main>
       <Button onClick={handleLogout}>logout</Button>
-    </div>
+    </main>
   );
 }
 

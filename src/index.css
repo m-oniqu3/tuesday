@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: "Geist", sans-serif;
+  font-family: "Inter", sans-serif;
   color: #35373a;
   font-size: 0.9rem
 }
@@ -38,6 +38,9 @@ body {
     @apply bg-white h-full max-h-125 p-4 rounded-2xl w-full overflow-scroll no-scrollbar
   }
 
+  .page {
+    @apply flex flex-col gap-4;
+  }
 
   .form-label {
     @apply text-xs font-medium text-neutral-800 capitalize

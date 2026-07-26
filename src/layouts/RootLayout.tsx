@@ -10,7 +10,7 @@ function RootLayout() {
 
   const nav = user ? <AuthNav /> : <GuestNav />;
   return (
-    <div>
+    <div className="page">
       {nav}
 
       <main>
