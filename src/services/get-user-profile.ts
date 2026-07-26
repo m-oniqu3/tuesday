@@ -13,13 +13,12 @@ export async function getUserProfile(uid: string): Promise<UserProfile | null> {
 
   const data = snapshot.data();
 
-  console.log({ data });
-
   return {
     id: snapshot.id,
     username: data.username,
     displayName: data.displayName,
     photoURL: data.photoURL,
+    bio: data.bio,
     createdAt: data.createdAt,
   };
 }

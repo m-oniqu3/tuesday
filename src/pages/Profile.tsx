@@ -1,7 +1,8 @@
 import { useParams } from "react-router";
 import UserLists from "../components/list/UserLists";
 import { useAuth } from "../hooks/useAuth";
-import { useUserLists } from "../hooks/useLists";
+
+import { useUserLists } from "../hooks/useUserLists";
 import { useUserProfile } from "../hooks/useUserProfile";
 import ProfileSummary from "../user/ProfileSummary";
 
@@ -10,17 +11,21 @@ function Profile() {
   const { user } = useAuth();
 
   const { data: profile, isLoading, error } = useUserProfile(username);
-  const { data: lists, isLoading: isListsLoading } = useUserLists(profile?.id);
 
-  if (isLoading || isListsLoading) {
+  const { data: lists, isLoading: isProfileLoading } = useUserLists(
+    profile?.id,
+    user?.uid,
+  );
+
+  // const isOwner = user?.uid === profile?.id;
+
+  if (isLoading || isProfileLoading) {
     return <p>Loading...</p>;
   }
 
   if (error || !profile) {
     return <p>User not found</p>;
   }
-
-  console.log({ profile });
 
   return (
     <div className="page">
@@ -30,7 +35,7 @@ function Profile() {
         userId={user?.uid ?? null}
       />
 
-      <UserLists username={profile.username} userId={profile.id} />
+      <UserLists lists={lists ?? []} username={profile.username} />
     </div>
   );
 }

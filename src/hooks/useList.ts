@@ -1,11 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
 import { getListBySlug } from "../services/list";
-import { type List } from "../types/list";
 
-export function useList(userId?: string, slug?: string) {
-  return useQuery<List | null>({
-    queryKey: ["list", userId, slug],
-    queryFn: () => getListBySlug(userId!, slug!),
+export function useList(userId?: string, slug?: string, viewerId?: string) {
+  return useQuery({
+    queryKey: ["list", userId, slug, viewerId],
+    queryFn: () => getListBySlug(userId!, slug!, viewerId),
     enabled: !!userId && !!slug,
   });
 }

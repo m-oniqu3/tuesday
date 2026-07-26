@@ -26,7 +26,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
     return unsubscribe;
   }, []);
-  console.log(user);
 
   const value = useMemo(() => {
     return { user, loading, profile };

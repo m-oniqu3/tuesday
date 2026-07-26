@@ -6,5 +6,6 @@ export function useUserProfile(username?: string) {
     queryKey: ["profile", username],
     queryFn: () => getUserByUsername(username!),
     enabled: !!username,
+    staleTime: 1000 * 60 * 5,
   });
 }

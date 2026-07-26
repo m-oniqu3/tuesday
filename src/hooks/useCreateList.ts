@@ -26,7 +26,8 @@ export function useCreateList(userId?: string) {
       });
     },
 
-    onError: () => {
+    onError: (error) => {
+      console.log(error);
       toast.error("Failed to create list");
     },
   });

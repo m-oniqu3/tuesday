@@ -18,6 +18,7 @@ function List() {
   const { data: list, isLoading: isListLoading } = useList(
     profile?.id,
     listSlug,
+    user?.uid,
   );
 
   if (isUserLoading || isListLoading) {

@@ -31,7 +31,12 @@ function CreateList() {
   } = form;
 
   async function onSubmitForm(input: CreateList) {
-    createListMutation.mutate(input);
+    try {
+      createListMutation.mutate(input);
+    } catch (error) {
+      console.log("error in creation");
+      console.error(error);
+    }
   }
   return (
     <div

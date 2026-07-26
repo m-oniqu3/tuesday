@@ -40,7 +40,7 @@ function ListSummary({ summary, profile }: Props) {
           </p>
 
           <span>&#xb7;</span>
-          {summary.createdAt && <p>{formatDate(summary.createdAt.toDate())}</p>}
+          <p>{formatDate(summary.createdAt)}</p>
         </div>
       </article>
 
