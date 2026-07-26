@@ -1,19 +1,19 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { LoadingIcon } from "../../utils/icons";
 import {
   CreateListSchema,
   type CreateList,
-} from "../../utils/validation/create-list";
-import { useAuth } from "../hook/useAuth";
-import { useModal } from "../hook/useModal";
-import { createList } from "../services/list";
-import Button from "./Button";
+} from "../../../utils/validation/create-list";
+import { useAuth } from "../../hooks/useAuth";
+import { useCreateList } from "../../hooks/useCreateList";
+import { useModal } from "../../hooks/useModal";
+import Button from "../Button";
 
 function CreateList() {
   const { user } = useAuth();
   const { stopPropagation, closeModal } = useModal();
+
+  const createListMutation = useCreateList(user?.uid);
 
   const form = useForm<CreateList>({
     resolver: zodResolver(CreateListSchema),
@@ -27,29 +27,15 @@ function CreateList() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = form;
 
   async function onSubmitForm(input: CreateList) {
-    try {
-      if (!user) return;
-
-      await createList(user.uid, input);
-      toast.success("List created");
-
-      closeModal();
-    } catch (error) {
-      console.error(error);
-      form.setError("root", {
-        message: "Something went wrong creating your list.",
-      });
-
-      toast.error("Failed to create list");
-    }
+    createListMutation.mutate(input);
   }
   return (
     <div
-      className="relative panel grid grid-rows-[auto_1fr] gap-4 w-76 h-110"
+      className="relative panel grid grid-rows-[auto_1fr] gap-4 w-76 h-80"
       onClick={stopPropagation}
     >
       <header className="flex flex-col gap-4">
@@ -119,18 +105,11 @@ function CreateList() {
           <Button onClick={closeModal}>Cancel</Button>
 
           <Button
-            disabled={isSubmitting}
+            disabled={createListMutation.isPending}
             type="submit"
-            className="bg-neutral-800 text-white"
+            className="bg-red-800 text-white"
           >
-            {isSubmitting ? (
-              <div className="flex items-center justify-center gap-2">
-                Creating
-                <LoadingIcon className="size-4 animate-spin" />
-              </div>
-            ) : (
-              "Create List"
-            )}
+            {createListMutation.isPending ? "Creating..." : "Create List"}
           </Button>
         </div>
       </form>

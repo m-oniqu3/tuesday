@@ -4,6 +4,7 @@ import GuestRoute from "./components/auth/GuestRoute";
 import AuthLayout from "./layouts/AuthLayout";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
+import List from "./pages/List";
 import Profile from "./pages/Profile";
 
 function AppRoutes() {
@@ -21,7 +22,7 @@ function AppRoutes() {
       <Route element={<RootLayout />}>
         <Route index element={<Home />} />
         <Route path=":username" element={<Profile />} />
-        {/* <Route path=":username/:listSlug" element={<List />} /> */}
+        <Route path=":username/:listSlug" element={<List />} />
       </Route>
       {/* </Route> */}
     </Routes>

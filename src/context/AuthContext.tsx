@@ -4,6 +4,7 @@ import { type User } from "firebase/auth";
 
 type AuthContextType = {
   user: User | null;
+  // profile: UserProfile | null;
   loading: boolean;
 };
 

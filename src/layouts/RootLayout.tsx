@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import AuthNav from "../components/nav/AuthNav";
 import GuestNav from "../components/nav/GuestNav";
-import { useAuth } from "../hook/useAuth";
+import { useAuth } from "../hooks/useAuth";
 
 function RootLayout() {
   const { user, loading } = useAuth();

@@ -1,6 +1,6 @@
-import { useModal } from "../hook/useModal";
+import { useModal } from "../hooks/useModal";
 import { ModalType } from "../types/modal";
-import CreateList from "./CreateList";
+import CreateList from "./list/CreateList";
 import ModalOverlay from "./ModalOverlay";
 
 export default function ModalManager() {

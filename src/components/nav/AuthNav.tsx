@@ -4,8 +4,10 @@ import {
   ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import { FilmIcon } from "@heroicons/react/24/solid";
-import { useAuth } from "../../hook/useAuth";
-import { useModal } from "../../hook/useModal";
+import { Link } from "react-router";
+import { useAuth } from "../../hooks/useAuth";
+import { useCurrentUserProfile } from "../../hooks/useCurrentUserProfile";
+import { useModal } from "../../hooks/useModal";
 import { ModalType } from "../../types/modal";
 import Button from "../Button";
 import Searchbar from "./Searchbar";
@@ -14,7 +16,12 @@ function AuthNav() {
   const { user } = useAuth();
   const { openModal } = useModal();
 
+  const { data: profile } = useCurrentUserProfile();
+
+  if (!user || !profile) return null;
+
   function handleCreateListModal() {
+    if (!user) return;
     openModal(ModalType.CREATE_LIST);
   }
 
@@ -26,22 +33,27 @@ function AuthNav() {
         <Searchbar />
 
         <Bars4Icon className="size-5 lg:hidden" />
-        <div className="hidden lg:flex items-center gap-4">
-          <Button
-            type="button"
-            className="bg-[#991b1b] text-white"
-            onClick={handleCreateListModal}
-          >
-            Create
-          </Button>
-          <BookmarkIcon className="size-4" />
 
-          <div className="size-6 text-xs rounded-full bg-[#d1e7e0] text-[#e09a8e] flex-center">
-            {user?.displayName?.[0] ?? ""}
+        {profile && (
+          <div className="hidden lg:flex items-center gap-4">
+            <Button
+              type="button"
+              className="bg-[#991b1b] text-white"
+              onClick={handleCreateListModal}
+            >
+              Create
+            </Button>
+            <BookmarkIcon className="size-4" />
+
+            <Link
+              to={`/${profile.username}`}
+              className="size-6 text-xs uppercase rounded-full bg-[#d1e7e0] text-[#e09a8e] flex-center"
+            >
+              {String(profile.username)[0]}
+            </Link>
+            <ChevronDownIcon className="size-4" />
           </div>
-
-          <ChevronDownIcon className="size-4" />
-        </div>
+        )}
       </nav>
     </header>
   );

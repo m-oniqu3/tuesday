@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useModal } from "../hook/useModal";
+import { useModal } from "../hooks/useModal";
 
 export default function ModalOverlay({
   children,

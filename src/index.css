@@ -8,9 +8,14 @@
   font-family: "Geist", sans-serif;
 } */
 
+@theme {
+  --text-sm: 0.8rem;
+}
+
 body {
   font-family: "Geist", sans-serif;
   color: #35373a;
+  font-size: 0.9rem
 }
 
 @layer components {
@@ -30,7 +35,7 @@ body {
   }
 
   .panel {
-    @apply bg-white h-full max-h-125 p-4 rounded-3xl w-full overflow-scroll no-scrollbar
+    @apply bg-white h-full max-h-125 p-4 rounded-2xl w-full overflow-scroll no-scrollbar
   }
 
 
@@ -39,8 +44,7 @@ body {
   }
 
   .input {
-    @apply w-full bg-[#F5F4F2] px-3 py-3 font-medium rounded-lg focus:outline-none text-neutral-800 text-sm placeholder:text-sm;
-    font-size: var(--text-small);
+    @apply w-full bg-[#F5F4F2] p-2 font-medium rounded-lg focus:outline-none text-neutral-800 text-sm;
   }
 
   .input-error {
