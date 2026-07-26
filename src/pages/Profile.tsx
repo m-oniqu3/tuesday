@@ -2,6 +2,7 @@ import { useParams } from "react-router";
 import UserLists from "../components/list/UserLists";
 import { useAuth } from "../hooks/useAuth";
 
+import Button from "../components/Button";
 import { useUserLists } from "../hooks/useUserLists";
 import { useUserProfile } from "../hooks/useUserProfile";
 import ProfileSummary from "../user/ProfileSummary";
@@ -12,7 +13,12 @@ function Profile() {
 
   const { data: profile, isLoading, error } = useUserProfile(username);
 
-  const { data: lists } = useUserLists(profile?.id, user?.uid);
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useUserLists(
+    profile?.id,
+    user?.uid,
+  );
+
+  const lists = data?.pages.flatMap((page) => page?.lists) ?? [];
 
   // const isOwner = user?.uid === profile?.id;
 
@@ -33,6 +39,16 @@ function Profile() {
       />
 
       <UserLists lists={lists ?? []} username={profile.username} />
+
+      {hasNextPage && (
+        <Button
+          className="my-4 hover:gray"
+          onClick={() => fetchNextPage()}
+          disabled={isFetchingNextPage}
+        >
+          {isFetchingNextPage ? "Loading..." : "Load more"}
+        </Button>
+      )}
     </div>
   );
 }

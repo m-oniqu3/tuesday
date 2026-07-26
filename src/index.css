@@ -10,6 +10,7 @@
 
 @theme {
   --text-sm: 0.8rem;
+  --breakpoint-xs: 20rem;
 }
 
 body {
@@ -40,7 +41,7 @@ body {
   }
 
   .page {
-    @apply flex flex-col gap-4;
+    @apply flex flex-col gap-4 pb-4;
   }
 
   .form-label {

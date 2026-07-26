@@ -1,10 +1,15 @@
 import {
   addDoc,
   collection,
+  type DocumentData,
   getDocs,
+  limit,
   orderBy,
   query,
+  QueryConstraint,
+  type QueryDocumentSnapshot,
   serverTimestamp,
+  startAfter,
   where,
 } from "firebase/firestore";
 import { AppError } from "../../utils/AppError";
@@ -48,31 +53,40 @@ import { listExists } from "./list-exists";
 export async function getUserLists(
   profileId: string,
   viewerId?: string,
-): Promise<List[]> {
+  cursor?: QueryDocumentSnapshot<DocumentData>,
+): Promise<{
+  lists: List[];
+  nextCursor: QueryDocumentSnapshot | null;
+}> {
   const listsRef = collection(db, "lists");
 
   const isOwner = profileId === viewerId;
 
-  const constraints = [where("userId", "==", profileId)];
-
-  console.log({
-    profileId,
-    viewerId,
-    isOwner,
-  });
+  const constraints: QueryConstraint[] = [where("userId", "==", profileId)];
 
   if (!isOwner) {
     constraints.push(where("private", "==", false));
   }
 
-  const q = query(listsRef, ...constraints, orderBy("createdAt", "desc"));
+  constraints.push(orderBy("createdAt", "desc"));
 
+  if (cursor) {
+    constraints.push(startAfter(cursor));
+  }
+
+  constraints.push(limit(10));
+
+  const q = query(listsRef, ...constraints);
   const snapshot = await getDocs(q);
 
-  return snapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  })) as List[];
+  return {
+    lists: snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as List[],
+
+    nextCursor: snapshot.docs[snapshot.docs.length - 1] ?? null,
+  };
 }
 
 export async function createList(userId: string, input: CreateListInput) {
