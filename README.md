@@ -22,6 +22,8 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 - profile page
 - list page
 - prevent user from creating duplicate list 
+- fixed nav bar
+- load more on profile page for userlists
 
 
 #### now

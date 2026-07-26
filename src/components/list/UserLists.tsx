@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import type { List } from "../../types/list";
+import ListPreview from "./ListPreview";
 
 type Props = {
   lists: List[];
@@ -8,12 +9,14 @@ type Props = {
 
 function UserLists({ lists, username }: Props) {
   return (
-    <main>
-      <ul>
+    <main className="wrapper">
+      <ul className="grid grid-cols-1 gap-4 ">
         {lists.map((list) => {
           return (
             <li key={list.id}>
-              <Link to={`/${username}/${list.slug}`}>{list.name}</Link>
+              <Link to={`/${username}/${list.slug}`}>
+                <ListPreview key={list.id} list={list} />
+              </Link>
             </li>
           );
         })}
