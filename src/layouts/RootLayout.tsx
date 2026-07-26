@@ -10,10 +10,10 @@ function RootLayout() {
 
   const nav = user ? <AuthNav /> : <GuestNav />;
   return (
-    <div className="page">
-      {nav}
+    <div className="page relative">
+      <div className="fixed top-0 left-0 w-full bg-white z-50">{nav}</div>
 
-      <main>
+      <main className="absolute top-16 py-4 left-0 w-full">
         <Outlet />
       </main>
     </div>

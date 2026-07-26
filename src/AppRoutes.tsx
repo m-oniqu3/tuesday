@@ -6,6 +6,7 @@ import RootLayout from "./layouts/RootLayout";
 import Home from "./pages/Home";
 import List from "./pages/List";
 import Profile from "./pages/Profile";
+import Search from "./pages/Search";
 
 function AppRoutes() {
   return (
@@ -23,6 +24,8 @@ function AppRoutes() {
         <Route index element={<Home />} />
         <Route path=":username" element={<Profile />} />
         <Route path=":username/:listSlug" element={<List />} />
+
+        <Route path="/search" element={<Search />} />
       </Route>
       {/* </Route> */}
     </Routes>

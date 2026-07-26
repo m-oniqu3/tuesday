@@ -15,21 +15,22 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 - list creation
 - auth nav
 - list summary
-
-
-
-#### today's goals
 - profile page
-- list page
 - prevent user from creating duplicate list 
 - fixed nav bar
 - load more on profile page for userlists
 
 
+
+#### today's goals
+- list page
+
+
 #### now
 - list page
-- profile page 
--
+- search for a film
+- add film to list
+- display film in list
 
 
 ### version 1

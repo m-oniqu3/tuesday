@@ -1,11 +1,26 @@
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { FilmIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 function Searchbar() {
-  const [search, setSearch] = useState("");
+  const [query, setQuery] = useState("");
+
+  const navigate = useNavigate();
+
+  function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
+    e.preventDefault();
+    console.log(e);
+
+    if (!query.trim()) return;
+
+    console.log({ query });
+
+    navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+  }
+
   return (
-    <form className="grid grid-cols-[45px_auto_45px]">
+    <form className="grid grid-cols-[45px_auto_45px]" onSubmit={handleSubmit}>
       <div className="gray flex-center rounded-l-2xl">
         <FilmIcon className="size-4.5 text-neutral-400" />
       </div>
@@ -13,20 +28,22 @@ function Searchbar() {
       <input
         type="text"
         className="gray w-full text-sm h-12 leading-5 focus:outline-none placeholder:text-neutral-400 placeholder:text-sm"
-        placeholder="Search..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder="Search films..."
       />
 
       <button
-        type="button"
-        onClick={() => setSearch("")}
+        type="submit"
         className="gray pr-4 flex-center rounded-r-2xl cursor-pointer"
       >
-        {!search ? (
+        {!query ? (
           <MagnifyingGlassIcon className="size-4 text-neutral-400" />
         ) : (
-          <XMarkIcon className="size-4.5 text-neutral-400" />
+          <XMarkIcon
+            className="size-4.5 text-neutral-400"
+            onClick={() => setQuery("")}
+          />
         )}
       </button>
     </form>
