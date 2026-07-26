@@ -11,9 +11,9 @@ type Props = {
 
 function ListSummary({ summary, profile }: Props) {
   return (
-    <section className="wrapper flex flex-col gap-4">
+    <section className="wrapper flex flex-col gap-4 ">
       <article className="max-w-112.5 flex flex-col gap-1 ">
-        <h3 className="text-[14.5px] font-semibold max-w-lg text-neutral-800">
+        <h3 className="text-[14.5px] font-medium max-w-lg text-neutral-800">
           {summary.name}
         </h3>
 
