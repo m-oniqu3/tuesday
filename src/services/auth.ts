@@ -4,7 +4,7 @@ import {
   signOut,
   type User,
 } from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { doc, getDoc, serverTimestamp, setDoc } from "firebase/firestore";
 import { generateUsername } from "../../utils/generate-username";
 import { auth, db } from "../lib/firebase";
 
@@ -29,11 +29,12 @@ async function createUserProfile(user: User) {
   const snapshot = await getDoc(userRef);
 
   if (!snapshot.exists()) {
-    await setDoc(userRef, {
+    await setDoc(doc(db, "users", user.uid), {
       username: generateUsername(user),
-      email: user.email,
-      avatar: user.photoURL,
-      createdAt: new Date(),
+      displayName: "",
+      bio: "",
+      photoURL: user.photoURL ?? null,
+      createdAt: serverTimestamp(),
     });
   }
 }

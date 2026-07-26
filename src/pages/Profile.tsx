@@ -1,13 +1,18 @@
 import { useParams } from "react-router";
 import UserLists from "../components/list/UserLists";
+import { useAuth } from "../hooks/useAuth";
+import { useUserLists } from "../hooks/useLists";
 import { useUserProfile } from "../hooks/useUserProfile";
+import ProfileSummary from "../user/ProfileSummary";
 
 function Profile() {
   const { username } = useParams();
+  const { user } = useAuth();
 
   const { data: profile, isLoading, error } = useUserProfile(username);
+  const { data: lists, isLoading: isListsLoading } = useUserLists(profile?.id);
 
-  if (isLoading) {
+  if (isLoading || isListsLoading) {
     return <p>Loading...</p>;
   }
 
@@ -18,10 +23,12 @@ function Profile() {
   console.log({ profile });
 
   return (
-    <div>
-      <p>hey from profille</p>
-      <h1>{profile.username}</h1>
-      <p>display : {profile.displayName}</p>
+    <div className="page">
+      <ProfileSummary
+        summary={profile}
+        listsCount={lists?.length ?? 0}
+        userId={user?.uid ?? null}
+      />
 
       <UserLists username={profile.username} userId={profile.id} />
     </div>

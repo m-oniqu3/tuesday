@@ -4,6 +4,7 @@ export type UserProfile = {
   id: string;
   username: string;
   displayName: string;
-  photoURL: string;
+  bio: string;
+  photoURL: string | null;
   createdAt: Timestamp;
 };

@@ -22,6 +22,7 @@ export async function getUserByUsername(
     id: doc.id,
     username: data.username,
     displayName: data.displayName,
+    bio: data.bio,
     photoURL: data.photoURL,
     createdAt: data.createdAt,
   };

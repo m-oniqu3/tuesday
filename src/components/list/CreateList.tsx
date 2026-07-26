@@ -39,7 +39,7 @@ function CreateList() {
       onClick={stopPropagation}
     >
       <header className="flex flex-col gap-4">
-        <p className="text-xs font-medium text-center">Create List</p>
+        <p className="text-xs text-center">Create List</p>
         {/* 
         {collectionPayload?.film && (
           <p className="text-sm p-2 rounded-xl bg-red-700 text-white font-medium">

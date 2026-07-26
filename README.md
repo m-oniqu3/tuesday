@@ -32,7 +32,11 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 
 ### version 1
 - use omdb api to fetch data
+- comment on films
 
+### version 1.1
+- discuss films
+- comment (tree level) on films
 
 ### version 2
 - add extension to scrape data from netflix and save to create list

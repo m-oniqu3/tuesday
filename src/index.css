@@ -44,11 +44,11 @@ body {
   }
 
   .form-label {
-    @apply text-xs font-medium text-neutral-800 capitalize
+    @apply text-xs text-neutral-800 capitalize
   }
 
   .input {
-    @apply w-full bg-[#F5F4F2] p-2 font-medium rounded-lg focus:outline-none text-neutral-800 text-sm;
+    @apply w-full bg-[#F5F4F2] p-2 rounded-lg focus:outline-none text-neutral-800 text-sm;
   }
 
   .input-error {

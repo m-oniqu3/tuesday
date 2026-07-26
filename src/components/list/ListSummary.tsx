@@ -27,7 +27,9 @@ function ListSummary({ summary, profile }: Props) {
           {summary.private && (
             <p className="flex gap-1">
               Private
-              <LockClosedIcon className="size-4" />
+              <span>
+                <LockClosedIcon className="size-4" />
+              </span>
             </p>
           )}
 
