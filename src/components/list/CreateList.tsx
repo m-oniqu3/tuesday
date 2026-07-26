@@ -35,7 +35,7 @@ function CreateList() {
   }
   return (
     <div
-      className="relative panel grid grid-rows-[auto_1fr] gap-4 w-76 h-80"
+      className="relative panel grid grid-rows-[auto_1fr] gap-4 w-76 h-100"
       onClick={stopPropagation}
     >
       <header className="flex flex-col gap-4">
@@ -107,7 +107,7 @@ function CreateList() {
           <Button
             disabled={createListMutation.isPending}
             type="submit"
-            className="bg-red-800 text-white"
+            className="bg-neutral-800 text-white"
           >
             {createListMutation.isPending ? "Creating..." : "Create List"}
           </Button>

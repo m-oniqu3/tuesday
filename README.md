@@ -2,7 +2,7 @@
 save and discuss films; inspired by movie tuesday at palace multiplex; trying to bring imdb lists back! whatever that was!
 
 #### mvp goals
-- login
+- auth
 - create a list
 - search for a film
 - see film details
@@ -14,17 +14,20 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 - google sign in
 - list creation
 - auth nav
+- list summary
 
 
 
 #### today's goals
 - profile page
 - list page
-- react router 
+- prevent user from creating duplicate list 
 
 
 #### now
 - list page
+- profile page 
+-
 
 
 ### version 1

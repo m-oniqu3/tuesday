@@ -5,15 +5,15 @@ import {
 } from "@heroicons/react/24/outline";
 import { FilmIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router";
+import { links } from "../../../utils/nav-list";
 import { useAuth } from "../../hooks/useAuth";
 import { useCurrentUserProfile } from "../../hooks/useCurrentUserProfile";
 import { useModal } from "../../hooks/useModal";
 import { ModalType } from "../../types/modal";
 import Avatar from "../Avatar";
 import Button from "../Button";
+import AuthButtons from "./AuthButtons";
 import Searchbar from "./Searchbar";
-
-const links = ["discover", "collections"];
 
 function AuthNav() {
   const { user } = useAuth();
@@ -56,7 +56,7 @@ function AuthNav() {
         <div className=" flex items-center justify-between gap-12 ">
           <Bars4Icon className="size-4.5 lg:hidden" />
 
-          {profile && (
+          {profile ? (
             <div className="hidden lg:flex items-center gap-4">
               <Button
                 type="button"
@@ -70,6 +70,8 @@ function AuthNav() {
               <Avatar name={profile?.displayName ?? profile?.username} />
               <ChevronDownIcon className="size-4.5" />
             </div>
+          ) : (
+            <AuthButtons />
           )}
         </div>
       </nav>

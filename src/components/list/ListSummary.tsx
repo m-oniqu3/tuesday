@@ -13,13 +13,19 @@ function ListSummary({ summary, profile }: Props) {
   return (
     <section className="wrapper flex flex-col gap-4 ">
       <article className="max-w-112.5 flex flex-col gap-1 ">
-        <h3 className="text-[14.5px] font-medium max-w-lg text-neutral-800">
+        <h3 className="text-[14px] font-medium max-w-lg text-neutral-800">
           {summary.name}
         </h3>
 
-        <div className="flex items-center gap-4 text-xs font-medium text-neutral-800">
+        {summary.description && (
+          <p className="text-neutral-600 text-sm leading-5">
+            {summary.description}
+          </p>
+        )}
+
+        <div className="flex items-center gap-4 text-xs  text-neutral-800">
           {summary.private && (
-            <p className="flex gap-1 font-medium">
+            <p className="flex gap-1">
               Private
               <LockClosedIcon className="size-4" />
             </p>
@@ -34,12 +40,6 @@ function ListSummary({ summary, profile }: Props) {
           <span>&#xb7;</span>
           {summary.createdAt && <p>{formatDate(summary.createdAt.toDate())}</p>}
         </div>
-
-        {summary.description && (
-          <p className="text-neutral-600 text-sm leading-5">
-            {summary.description}
-          </p>
-        )}
       </article>
 
       <div>
