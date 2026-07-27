@@ -1,4 +1,4 @@
-import type { OmdbSearchResponse } from "../types/film";
+import type { OmdbFilm, OmdbSearchResponse } from "../types/film";
 
 const API_KEY = import.meta.env.VITE_OMDB_API_KEY;
 
@@ -12,8 +12,12 @@ export async function searchFilms(
 
   const data = await response.json();
 
+  const films = (data.Search ?? []).filter(
+    (film: OmdbFilm) => film.Poster && film.Poster !== "N/A",
+  );
+
   return {
-    films: data.Search ?? [],
+    films,
     totalResults: Number(data.totalResults ?? 0),
   };
 }

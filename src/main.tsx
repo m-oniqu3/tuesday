@@ -6,8 +6,10 @@ import { BrowserRouter } from "react-router";
 import { Toaster } from "sonner";
 import AppRoutes from "./AppRoutes.tsx";
 import ModalManager from "./components/ModalManager.tsx";
+import OverlayManager from "./components/overlay/OverlayManager.tsx";
 import { AuthProvider } from "./context/AuthContextProvider.tsx";
 import { ModalProvider } from "./context/ModalContextProvider.tsx";
+import { OverlayProvider } from "./context/OverlayProvider.tsx";
 import "./index.css";
 import { queryClient } from "./lib/queryClient.ts";
 
@@ -15,14 +17,17 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
       <ModalProvider>
-        <BrowserRouter>
-          <QueryClientProvider client={queryClient}>
-            <AppRoutes />
-            <ModalManager />
-            <Toaster position="bottom-center" />
-            <ReactQueryDevtools initialIsOpen={false} />
-          </QueryClientProvider>
-        </BrowserRouter>
+        <OverlayProvider>
+          <BrowserRouter>
+            <QueryClientProvider client={queryClient}>
+              <AppRoutes />
+              <OverlayManager />
+              <ModalManager />
+              <Toaster position="bottom-center" />
+              <ReactQueryDevtools initialIsOpen={false} />
+            </QueryClientProvider>
+          </BrowserRouter>
+        </OverlayProvider>
       </ModalProvider>
     </AuthProvider>
   </StrictMode>,

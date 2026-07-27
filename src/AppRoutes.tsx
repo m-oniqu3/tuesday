@@ -3,6 +3,7 @@ import Auth from "./components/Auth";
 import GuestRoute from "./components/auth/GuestRoute";
 import AuthLayout from "./layouts/AuthLayout";
 import RootLayout from "./layouts/RootLayout";
+import Film from "./pages/Film";
 import Home from "./pages/Home";
 import List from "./pages/List";
 import Profile from "./pages/Profile";
@@ -26,6 +27,7 @@ function AppRoutes() {
         <Route path=":username/:listSlug" element={<List />} />
 
         <Route path="/search" element={<Search />} />
+        <Route path="/film/:filmSlug" element={<Film />} />
       </Route>
       {/* </Route> */}
     </Routes>

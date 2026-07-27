@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from "react-router";
+import { createFilmSlug } from "../../utils/createSlug";
 import Button from "../components/Button";
-import Film from "../components/film/Film";
+import FilmPreview from "../components/film/FilmPreview";
 import { useFilmSearch } from "../hooks/useFilmSearch";
 
 function Search() {
@@ -18,8 +19,8 @@ function Search() {
         {films.map((f) => {
           return (
             <li key={f.imdbID}>
-              <Link to="">
-                <Film film={f} />
+              <Link to={`/film/${createFilmSlug(f.Title, f.imdbID)}`}>
+                <FilmPreview film={f} />
               </Link>
             </li>
           );

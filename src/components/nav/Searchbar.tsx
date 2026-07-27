@@ -10,13 +10,14 @@ function Searchbar() {
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    console.log(e);
 
     if (!query.trim()) return;
 
-    console.log({ query });
-
-    navigate(`/search?q=${encodeURIComponent(query.trim())}`);
+    // console.log({ query });
+    navigate({
+      pathname: "/search",
+      search: `?q=${query.trim()}`,
+    });
   }
 
   return (
