@@ -8,13 +8,11 @@ function SaveFilmMenu() {
 
   const film = overlay.data as OmdbFilm;
 
-  if (!film) return null;
-
   return (
     <div
       ref={overlayRef}
       style={styles}
-      className="rounded-xl bg-white p-4 shadow-lg"
+      className="relative p-0 rounded-3xl overflow-hidden h-110 w-76 bg-white"
     >
       Save {film.Title}
     </div>
