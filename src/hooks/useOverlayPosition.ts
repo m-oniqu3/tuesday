@@ -66,17 +66,17 @@ export function useOverlayPosition() {
     };
   }, [closeOverlay]);
 
-  useEffect(() => {
-    function handleScroll() {
-      closeOverlay();
-    }
+  // useEffect(() => {
+  //   function handleScroll() {
+  //     closeOverlay();
+  //   }
 
-    window.addEventListener("scroll", handleScroll, true);
+  //   window.addEventListener("scroll", handleScroll, true);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll, true);
-    };
-  }, [closeOverlay]);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll, true);
+  //   };
+  // }, [closeOverlay]);
 
   return {
     overlayRef,

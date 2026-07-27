@@ -1,21 +1,25 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
-import { useOverlay } from "../../hooks/useOverlay";
 import type { OmdbFilm } from "../../types/film";
 
 type Props = {
   film: OmdbFilm;
+  openMenu: (
+    film: OmdbFilm,
+    position: {
+      x: number;
+      y: number;
+    },
+  ) => void;
+  activeFilm: OmdbFilm | null;
 };
-
-function FilmPreview({ film }: Props) {
-  const { openOverlay } = useOverlay();
-
+function FilmPreview({ film, openMenu }: Props) {
   function handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
     e.preventDefault();
     e.stopPropagation();
 
     const rect = e.currentTarget.getBoundingClientRect();
 
-    openOverlay("SAVE_FILM", film, {
+    openMenu(film, {
       x: rect.left,
       y: rect.bottom + 8,
     });

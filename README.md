@@ -24,6 +24,7 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 
 #### today's goals
 - list page
+- lru cache for recent lists 
 
 
 #### now

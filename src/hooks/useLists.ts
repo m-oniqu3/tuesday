@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getUserLists } from "../services/list";
+import { getLists } from "../services/list";
 
-export function useUserLists(userId?: string) {
+export function useLists(userId?: string) {
   return useQuery({
     queryKey: ["lists", userId],
-    queryFn: () => getUserLists(userId!),
+    queryFn: () => getLists(userId!),
     enabled: !!userId,
   });
 }

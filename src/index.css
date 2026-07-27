@@ -17,7 +17,8 @@ body {
   /* font-family: "Roboto", sans-serif; */
   /* color: #35373a; */
   /* font-family: "Geist", sans-serif; */
-  font-size: 0.9rem
+  font-size: 0.9rem;
+  /* position: relative; */
 }
 
 @layer components {

@@ -19,36 +19,19 @@ import { db } from "../lib/firebase";
 import type { CreateListInput, List } from "../types/list";
 import { listExists } from "./list-exists";
 
-// export async function getUserLists(
-//   profileId: string,
-//   viewerId?: string,
-// ): Promise<List[]> {
-//   const isOwner = profileId === viewerId;
+export async function getLists(profileId: string): Promise<List[]> {
+  const listsRef = collection(db, "lists");
 
-//   console.log({
-//     profileId,
-//     viewerId,
-//     isOwner,
-//   });
+  const q = query(listsRef, where("userId", "==", profileId));
+  const snapshot = await getDocs(q);
 
-//   const listsRef = collection(db, "lists");
+  console.log("query size:", snapshot.size);
 
-//   const constraints = [where("userId", "==", profileId)];
-
-//   if (!isOwner) {
-//     constraints.push(where("private", "==", false));
-//   }
-
-//   const q = query(listsRef, where("userId", "==", profileId));
-//   const snapshot = await getDocs(q);
-
-//   console.log("query size:", snapshot.size);
-
-//   return snapshot.docs.map((doc) => ({
-//     id: doc.id,
-//     ...doc.data(),
-//   })) as List[];
-// }
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as List[];
+}
 
 export async function getUserLists(
   profileId: string,
