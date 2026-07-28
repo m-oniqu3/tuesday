@@ -11,8 +11,14 @@ type Props = {
 
 function FilmPreview({ film }: Props) {
   const { user } = useAuth();
-  const { openModal } = useModal();
+  const { openModal, modal } = useModal();
 
+  const filmId =
+    modal.type === ModalType.SAVE_FILM
+      ? (modal.payload as { film: OmdbFilm }).film.imdbID
+      : undefined;
+
+  const isActiveFilm = filmId === film.imdbID;
   function handleSaveFilmModal(e: MouseEvent) {
     e.preventDefault();
 
@@ -24,14 +30,15 @@ function FilmPreview({ film }: Props) {
       <img src={film.Poster} alt={film.Title} className="w-full aspect-2/3 " />
 
       <div
-        className="
+        className={`
           absolute inset-0
           flex items-center justify-center
           bg-black/40
           opacity-0
           transition
           group-hover:opacity-100
-        "
+${isActiveFilm ? "opacity-100" : ""}
+        `}
       >
         <button
           onClick={handleSaveFilmModal}

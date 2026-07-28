@@ -24,3 +24,14 @@ export type OmdbFilmDetails = {
   Poster: string;
   imdbID: string;
 };
+
+export type SavedFilm = {
+  id: string;
+  collectionId: string;
+  filmId: number;
+};
+
+export type SavedFilmState = {
+  isSaved: boolean;
+  collections: SavedFilm[];
+};

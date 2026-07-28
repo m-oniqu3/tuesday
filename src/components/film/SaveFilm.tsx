@@ -5,9 +5,12 @@ import {
 } from "@heroicons/react/24/outline";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
 import { useState } from "react";
+import { toast } from "sonner";
 import { useAuth } from "../../hooks/useAuth";
+import { useFilmLists } from "../../hooks/useFilmLists";
 import { useLists } from "../../hooks/useLists";
 import { useModal } from "../../hooks/useModal";
+import { saveFilm } from "../../services/save-film";
 import type { OmdbFilm } from "../../types/film";
 import { ModalType } from "../../types/modal";
 import Button from "../Button";
@@ -17,17 +20,22 @@ function SaveFilm() {
   const { closeModal, modal } = useModal();
   const { data: lists, isLoading } = useLists(user?.uid);
 
+  const [isSavingFilm, setIsSavingFilm] = useState(false);
+
   const [search, setSearch] = useState("");
   const [selectedLists, setSelectedLists] = useState<string[]>([]);
 
-  if (modal.type !== ModalType.SAVE_FILM) return null;
+  // get lists the film is saved to
+  const { data: filmLists = [], isLoading: isLoadingFilmLists } = useFilmLists(
+    modal.type === ModalType.SAVE_FILM
+      ? (modal.payload as { film: OmdbFilm }).film.imdbID
+      : undefined,
+  );
 
   if (modal.type !== ModalType.SAVE_FILM) return null;
-
   const { film } = modal.payload as { film: OmdbFilm };
 
-  console.log("lists:", lists);
-
+  // select lists to save to
   function handleToggleList(listId: string) {
     setSelectedLists((current) =>
       current.includes(listId)
@@ -36,9 +44,28 @@ function SaveFilm() {
     );
   }
 
+  // search results
   const filteredLists = lists?.filter((list) =>
     list.name.toLowerCase().includes(search.toLowerCase()),
   );
+
+  async function handleSave() {
+    if (!user) return;
+    console.log("handle save", user);
+
+    try {
+      setIsSavingFilm(true);
+      await saveFilm(film, selectedLists);
+
+      closeModal();
+    } catch (error) {
+      console.log(error);
+
+      toast.error("Faled to save film.");
+    } finally {
+      setIsSavingFilm(false);
+    }
+  }
 
   return (
     <div
@@ -111,15 +138,25 @@ function SaveFilm() {
         </header>
 
         <div className="flex flex-col gap-4 h-full overflow-y-scroll no-scrollbar">
-          {isLoading && <p className="text-sm text-neutral-400">Loading...</p>}
+          {isLoading ||
+            (isLoadingFilmLists && (
+              <p className="text-sm text-neutral-400 p-2 text-center">
+                Loading...
+              </p>
+            ))}
 
           {!isLoading && !filteredLists?.length && (
-            <p className="text-sm text-neutral-400">No collections found</p>
+            <p className="text-sm text-neutral-400 p-2 text-center">
+              No filmLists found
+            </p>
           )}
 
           <ul className="flex flex-col gap-4 px-2 h-full overflow-y-scroll no-scrollbar ">
             {filteredLists?.map((list) => {
               const checked = selectedLists.includes(list.id);
+              const isSaved = filmLists
+                .flatMap((l) => l.collectionId)
+                .includes(list.id);
 
               return (
                 <li key={list.id}>
@@ -146,10 +183,15 @@ function SaveFilm() {
                       <p className="line-clamp-1 text-sm font-medium text-neutral-800">
                         {list.name}
                       </p>
-
                       <p className="text-sm text-zinc-500">
-                        {list.filmsCount}{" "}
-                        {list.filmsCount === 1 ? "film" : "films"}
+                        {isSaved ? (
+                          "Saved here"
+                        ) : (
+                          <>
+                            {list.filmsCount}{" "}
+                            {list.filmsCount === 1 ? "film" : "films"}
+                          </>
+                        )}
                       </p>
                     </div>
 
@@ -171,9 +213,11 @@ function SaveFilm() {
 
           <Button
             type="submit"
+            disabled={isSavingFilm}
             className="bg-neutral-800 text-white disabled:opacity-50"
+            onClick={handleSave}
           >
-            Save
+            {isSavingFilm ? "Saving..." : "Save"}
           </Button>
         </footer>
       </div>
