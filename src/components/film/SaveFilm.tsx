@@ -4,45 +4,29 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { LockClosedIcon } from "@heroicons/react/24/solid";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useLists } from "../../hooks/useLists";
+import { useModal } from "../../hooks/useModal";
 import type { OmdbFilm } from "../../types/film";
+import { ModalType } from "../../types/modal";
 import Button from "../Button";
 
-type Props = {
-  position: {
-    x: number;
-    y: number;
-  };
-  film: OmdbFilm;
-  onClose: () => void;
-};
-
-function SaveFilmMenu({ position, film, onClose }: Props) {
+function SaveFilm() {
   const { user } = useAuth();
+  const { closeModal, modal } = useModal();
   const { data: lists, isLoading } = useLists(user?.uid);
-
-  console.log("lists:", lists);
-
-  const menuRef = useRef<HTMLDivElement>(null);
 
   const [search, setSearch] = useState("");
   const [selectedLists, setSelectedLists] = useState<string[]>([]);
 
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    }
+  if (modal.type !== ModalType.SAVE_FILM) return null;
 
-    document.addEventListener("click", handleClickOutside);
+  if (modal.type !== ModalType.SAVE_FILM) return null;
 
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [onClose]);
+  const { film } = modal.payload as { film: OmdbFilm };
+
+  console.log("lists:", lists);
 
   function handleToggleList(listId: string) {
     setSelectedLists((current) =>
@@ -58,11 +42,9 @@ function SaveFilmMenu({ position, film, onClose }: Props) {
 
   return (
     <div
-      ref={menuRef}
       onClick={(e) => e.stopPropagation()}
-      className="absolute  left-0 top-full mt-2 z-50 h-110 w-76 rounded-3xl bg-white shadow-xl overflow-hidden
-      "
-      style={{ top: position.y, left: position.x }}
+      className="panel relative p-0 rounded-3xl overflow-hidden h-110 w-76 bg-white"
+      // style={{ top: position.y, left: position.x }}
     >
       <div className="grid grid-rows-[auto_auto_1fr_64px] h-full">
         <header className="flex flex-col gap-2 border-b border-gray-50 p-4">
@@ -185,7 +167,7 @@ function SaveFilmMenu({ position, film, onClose }: Props) {
         </div>
 
         <footer className="h-16 w-full p-4 flex items-center justify-end gap-4 border-t border-gray-50 shadow-xs absolute bottom-0 left-0 bg-white z-10">
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={closeModal}>Cancel</Button>
 
           <Button
             type="submit"
@@ -199,4 +181,4 @@ function SaveFilmMenu({ position, film, onClose }: Props) {
   );
 }
 
-export default SaveFilmMenu;
+export default SaveFilm;

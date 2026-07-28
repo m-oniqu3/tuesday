@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { getErrorMessage } from "../../../utils/getErrorMessage";
 import {
   CreateListSchema,
-  type CreateList,
+  type CreateList as NewList,
 } from "../../../utils/validation/create-list";
 import { useAuth } from "../../hooks/useAuth";
 import { useCreateList } from "../../hooks/useCreateList";
@@ -20,7 +20,7 @@ function CreateList() {
     ? getErrorMessage(createListMutation.error)
     : null;
 
-  const form = useForm<CreateList>({
+  const form = useForm<NewList>({
     resolver: zodResolver(CreateListSchema),
     defaultValues: {
       name: "",
@@ -35,7 +35,7 @@ function CreateList() {
     formState: { errors },
   } = form;
 
-  async function onSubmitForm(input: CreateList) {
+  async function onSubmitForm(input: NewList) {
     try {
       createListMutation.mutate(input);
     } catch (error) {

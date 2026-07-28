@@ -1,28 +1,23 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
+import type { MouseEvent } from "react";
+import { useAuth } from "../../hooks/useAuth";
+import { useModal } from "../../hooks/useModal";
 import type { OmdbFilm } from "../../types/film";
+import { ModalType } from "../../types/modal";
 
 type Props = {
   film: OmdbFilm;
-  openMenu: (
-    film: OmdbFilm,
-    position: {
-      x: number;
-      y: number;
-    },
-  ) => void;
-  activeFilm: OmdbFilm | null;
 };
-function FilmPreview({ film, openMenu }: Props) {
-  function handleSaveClick(e: React.MouseEvent<HTMLButtonElement>) {
+
+function FilmPreview({ film }: Props) {
+  const { user } = useAuth();
+  const { openModal } = useModal();
+
+  function handleSaveFilmModal(e: MouseEvent) {
     e.preventDefault();
-    e.stopPropagation();
 
-    const rect = e.currentTarget.getBoundingClientRect();
-
-    openMenu(film, {
-      x: rect.left,
-      y: rect.bottom + 8,
-    });
+    if (!user) return;
+    openModal(ModalType.SAVE_FILM, { film });
   }
   return (
     <figure className="group relative size-full overflow-hidden ">
@@ -39,7 +34,7 @@ function FilmPreview({ film, openMenu }: Props) {
         "
       >
         <button
-          onClick={handleSaveClick}
+          onClick={handleSaveFilmModal}
           className="
             flex
             size-10
