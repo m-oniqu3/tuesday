@@ -24,7 +24,8 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 
 #### today's goals
 - list page
-- lru cache for recent lists 
+-  recent lists 
+- films count on film preview - where should it come from
 
 
 #### now
@@ -37,6 +38,7 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 ### version 1
 - use omdb api to fetch data
 - comment on films
+- profile page should have grid view , list view and normal view or just merge into one (merge ) make the preview wider
 
 ### version 1.1
 - discuss films
@@ -49,6 +51,7 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 - sort films in list 
 - add colour scheme
 - add views ; grid view and list view 
+- save to multiple lists at a time 
 
 ### alt project name
 mancy - from archer

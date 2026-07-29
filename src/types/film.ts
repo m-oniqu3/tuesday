@@ -1,3 +1,5 @@
+import type { Timestamp } from "firebase/firestore";
+
 export type OmdbFilm = {
   Title: string;
   Year: string;
@@ -28,10 +30,18 @@ export type OmdbFilmDetails = {
 export type SavedFilm = {
   id: string;
   collectionId: string;
-  filmId: number;
+  filmId: string;
+  createdAt: Timestamp;
 };
 
 export type SavedFilmState = {
   isSaved: boolean;
   collections: SavedFilm[];
+};
+
+export type CollectionFilm = {
+  id: string;
+  collectionId: string;
+  filmId: string;
+  createdAt: Timestamp;
 };

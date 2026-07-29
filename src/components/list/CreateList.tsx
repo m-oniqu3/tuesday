@@ -45,7 +45,7 @@ function CreateList() {
   }
   return (
     <div
-      className="relative panel grid grid-rows-[auto_1fr] gap-4 w-76 h-100"
+      className="relative panel grid grid-rows-[auto_1fr] gap-4 w-76 h-110"
       onClick={stopPropagation}
     >
       <header className="flex flex-col gap-4">
