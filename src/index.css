@@ -11,11 +11,22 @@
 @theme {
   --text-sm: 0.8rem;
   --breakpoint-xs: 20rem;
+
+
+  --color-primary-pale: #cac7da;
+  --color-primary-light: #faf8ff;
+  --color-primary: #8685ef;
+  --color-neutral: #e5e5e5;
+
+  --color-secondary: #00ac87;
+  --color-dark: #363636;
+
+  --color-tertiary: #e27121;
 }
 
 body {
   /* font-family: "Roboto", sans-serif; */
-  /* color: #35373a; */
+  color: var(--color-dark);
   /* font-family: "Geist", sans-serif; */
   font-size: 0.9rem;
   /* position: relative; */
@@ -23,26 +34,30 @@ body {
 
 @layer components {
   .wrapper {
-    @apply w-[95%] mx-auto;
+    @apply w-[95%] mx-auto max-w-5xl
   }
 
   .flex-center {
     @apply flex justify-center items-center;
   }
 
+  .absolute-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2
+  }
+
   .gray {
-    @apply bg-[#f3eed9];
-    @apply bg-[#F5F4F2];
+    /* @apply bg-[#f3eed9]; */
+    /* @apply bg-[#F5F4F2]; */
     /* @apply bg-zinc-100 */
-    /* @apply bg-gray-100 */
+    @apply bg-neutral-200
   }
 
   .panel {
-    @apply bg-white h-full max-h-125 p-4 rounded-2xl w-full overflow-scroll no-scrollbar
+    @apply bg-white h-full max-h-125 p-4 rounded-3xl w-full overflow-scroll no-scrollbar
   }
 
   .page {
-    @apply flex flex-col gap-4 pb-4;
+    @apply flex flex-col gap-12;
   }
 
   .form-label {
@@ -59,10 +74,10 @@ body {
 
 
   .content-grid {
-    @apply gap-8;
-    display: grid;
+    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-12;
 
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    /* grid-template-columns: repeat(2, minmax(0, 1fr));
 
     @media (min-width: 640px) {
       @apply gap-12;
@@ -78,7 +93,16 @@ body {
 
     @media (min-width: 1536px) {
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    }
+    } */
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply text-neutral-800
   }
 }
 

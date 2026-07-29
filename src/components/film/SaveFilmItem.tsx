@@ -15,7 +15,7 @@ function SaveFilmItem(props: Props) {
   return (
     <li key={list.id}>
       <label className="grid cursor-pointer grid-cols-[40px_auto_60px] items-center gap-4 rounded-2xl p-3 transitiion hover:bg-neutral-100">
-        <figure className="relative grid size-10 place-items-center rounded-xl bg-neutral-800">
+        <figure className="relative grid size-10 place-items-center rounded-xl gray">
           {list.private && <LockClosedIcon className="size-3.5 text-white" />}
         </figure>
 
@@ -35,7 +35,7 @@ function SaveFilmItem(props: Props) {
         </div>
 
         <Button
-          className={`bg-neutral-800 transition text-white hidden hover:block`}
+          className={`bg-tertiary transition text-white hidden hover:block`}
           disabled={disabled}
           onClick={() => selectList(list.id)}
         >

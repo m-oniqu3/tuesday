@@ -33,8 +33,6 @@ function SaveFilm() {
   // get lists the film is saved to
   const { data: filmLists = [] } = useFilmLists(lists ?? [], film?.imdbID);
 
-  console.log({ filmLists });
-
   function handleSelectedList(listId: string) {
     setSelectedList(listId);
   }
@@ -48,11 +46,13 @@ function SaveFilm() {
         setIsSavingFilm(true);
         await saveFilm(film, selectedList);
 
+        toast.message("Film Saved.");
+
         closeModal();
       } catch (error) {
         console.log(error);
 
-        toast.error("Faled to save film.");
+        toast.message("Faled to save film.");
       } finally {
         setIsSavingFilm(false);
       }
@@ -75,7 +75,7 @@ function SaveFilm() {
   return (
     <div
       onClick={(e) => e.stopPropagation()}
-      className="panel relative p-0 rounded-2xl overflow-hidden h-110 w-76 bg-white"
+      className="panel relative p-0 overflow-hidden h-110 w-76 bg-white"
       // style={{ top: position.y, left: position.x }}
     >
       <div className="grid grid-rows-[auto_auto_1fr_64px] h-full">
@@ -128,8 +128,9 @@ function SaveFilm() {
               place-items-center
               rounded-2xl
               text-neutral-500
+              cursor-pointer
               transition
-              hover:bg-neutral-800
+              hover:bg-secondary
               hover:text-white
             "
             >
@@ -179,10 +180,10 @@ function SaveFilm() {
 
         <footer className="h-16 w-full p-4 flex items-center justify-end gap-4 border-t border-gray-50 shadow-xs absolute bottom-0 left-0 bg-white z-10">
           <Button onClick={closeModal}>Cancel</Button>
-          {search && filteredLists?.length === 0 && (
+          {search && (
             <Button
               type="submit"
-              className="bg-neutral-800 text-white disabled:opacity-50"
+              className="bg-secondary text-white disabled:opacity-50"
             >
               Create List
             </Button>

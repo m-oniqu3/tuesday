@@ -2,7 +2,9 @@ import { useParams } from "react-router";
 import UserLists from "../components/list/UserLists";
 import { useAuth } from "../hooks/useAuth";
 
+import { Suspense } from "react";
 import Button from "../components/Button";
+import Loading from "../components/Loading";
 import { useUserLists } from "../hooks/useUserLists";
 import { useUserProfile } from "../hooks/useUserProfile";
 import ProfileSummary from "../user/ProfileSummary";
@@ -23,7 +25,7 @@ function Profile() {
   // const isOwner = user?.uid === profile?.id;
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (error || !profile) {
@@ -38,17 +40,19 @@ function Profile() {
         userId={user?.uid ?? null}
       />
 
-      <UserLists lists={lists ?? []} username={profile.username} />
+      <Suspense fallback={<Loading />}>
+        <UserLists lists={lists ?? []} username={profile.username} />
 
-      {hasNextPage && (
-        <Button
-          className="my-4 hover:gray"
-          onClick={() => fetchNextPage()}
-          disabled={isFetchingNextPage}
-        >
-          {isFetchingNextPage ? "Loading..." : "Load more"}
-        </Button>
-      )}
+        {hasNextPage && (
+          <Button
+            className="my-4 hover:gray"
+            onClick={() => fetchNextPage()}
+            disabled={isFetchingNextPage}
+          >
+            {isFetchingNextPage ? "Loading..." : "Load more"}
+          </Button>
+        )}
+      </Suspense>
     </div>
   );
 }

@@ -29,10 +29,15 @@ function AuthNav() {
   }
 
   return (
-    <header className=" h-16">
+    <header className=" h-16 sm:h-20">
       <nav className="wrapper h-full flex items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <FilmIcon className="size-4.5 text-neutral-800" />
+          <div className="flex items-center gap-2">
+            <FilmIcon className="size-6 text-primary sm:hidden" />
+            <h1 className="text-xl font-bold text-primary hidden sm:block">
+              tuesday
+            </h1>
+          </div>
 
           <ul className="hidden lg:flex gap-4 items-center">
             {links.map((link) => {
@@ -49,7 +54,7 @@ function AuthNav() {
           </ul>
         </div>
 
-        <div className="w-full max-w-sm">
+        <div className="w-full max-w-xs">
           <Searchbar />
         </div>
 
@@ -60,7 +65,7 @@ function AuthNav() {
             <div className="hidden lg:flex items-center gap-4">
               <Button
                 type="button"
-                className="bg-neutral-800 text-white"
+                className="bg-secondary text-white"
                 onClick={handleCreateListModal}
               >
                 Create

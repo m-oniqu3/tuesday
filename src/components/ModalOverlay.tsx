@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useModal } from "../hooks/useModal";
 
 export default function ModalOverlay({
@@ -8,13 +7,13 @@ export default function ModalOverlay({
 }) {
   const { closeModal } = useModal();
 
-  useEffect(() => {
-    document.body.style.overflow = "hidden";
+  // useEffect(() => {
+  //   document.body.style.overflow = "hidden";
 
-    return () => {
-      document.body.style.overflow = "auto";
-    };
-  }, []);
+  //   return () => {
+  //     document.body.style.overflow = "auto";
+  //   };
+  // }, []);
 
   return (
     <div

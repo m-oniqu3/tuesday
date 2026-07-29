@@ -25,8 +25,6 @@ export async function getLists(profileId: string): Promise<List[]> {
   const q = query(listsRef, where("userId", "==", profileId));
   const snapshot = await getDocs(q);
 
-  console.log("query size:", snapshot.size);
-
   return snapshot.docs.map((doc) => ({
     id: doc.id,
     ...doc.data(),

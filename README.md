@@ -19,6 +19,8 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 - prevent user from creating duplicate list 
 - fixed nav bar
 - load more on profile page for userlists
+- search for a film
+- add film to list
 
 
 
@@ -30,8 +32,6 @@ save and discuss films; inspired by movie tuesday at palace multiplex; trying to
 
 #### now
 - list page
-- search for a film
-- add film to list
 - display film in list
 
 

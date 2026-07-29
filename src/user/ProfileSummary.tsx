@@ -12,33 +12,36 @@ function ProfileSummary({ summary, listsCount, userId }: Props) {
   const isOwnAccount = summary.id === userId;
 
   return (
-    <section className="wrapper flex flex-col gap-4 ">
+    <section className="wrapper flex flex-col gap-4 sm:flex-row sm:gap-8">
       <Avatar
         name={summary.displayName ?? summary.username}
-        className="size-16"
+        className="size-16 sm:siz-20 md:size-24 lg:size-28"
       />
 
-      <article className="flex flex-col gap-1">
-        <h2 className="font-medium text-[14px] m-0 text-neutral-800 ">
-          <span>
-            {summary.displayName ? summary.displayName : summary.username}
-          </span>
-        </h2>
+      <div className="flex flex-col gap-2">
+        <article className="flex flex-col gap-1">
+          <div>
+            <h2 className="font-medium text-[14px] sm:text-md m-0 ">
+              <span>
+                {summary.displayName ? summary.displayName : summary.username}
+              </span>
+            </h2>
+            <div className="flex items-center gap-2">
+              <p className="text-sm text-neutral-600">@{summary.username}</p>
 
-        <p className="text-neutral-600 leading-5 text-sm">{summary.bio}</p>
+              <span>&bull;</span>
 
-        <div className="flex items-center gap-2">
-          <p className="text-sm text-neutral-600">@{summary.username}</p>
+              <p className="text-sm text-neutral-600">
+                {listsCount} {listsCount === 1 ? "list" : "lists"}
+              </p>
+            </div>
+          </div>
 
-          <span>&bull;</span>
+          <p className="text-neutral-600 leading-5 text-sm">{summary.bio}</p>
+        </article>
 
-          <p className="text-sm text-neutral-600">
-            {listsCount} {listsCount === 1 ? "list" : "lists"}
-          </p>
-        </div>
-      </article>
-
-      {isOwnAccount && <ProfileToolbar summary={summary} />}
+        {isOwnAccount && <ProfileToolbar summary={summary} />}
+      </div>
     </section>
   );
 }

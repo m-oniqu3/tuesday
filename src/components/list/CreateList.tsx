@@ -119,7 +119,7 @@ function CreateList() {
           <Button
             disabled={createListMutation.isPending}
             type="submit"
-            className="bg-neutral-800 text-white"
+            className="bg-secondary text-white"
           >
             {createListMutation.isPending ? "Creating..." : "Create List"}
           </Button>

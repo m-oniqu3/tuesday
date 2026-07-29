@@ -9,7 +9,7 @@ function Avatar({ name, className = "" }: Props) {
   return (
     <Link
       to={`/${name}`}
-      className={`size-7 text-xs uppercase rounded-full bg-neutral-800 text-white flex-center ${className}`}
+      className={`size-9 text-xs sm:text-sm md:text-md lg:text-base text-neutral-800 gray rounded-full gray  flex-center ${className}`}
     >
       {String(name)[0]}
     </Link>

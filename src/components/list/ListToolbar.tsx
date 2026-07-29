@@ -1,5 +1,4 @@
 import {
-  ArrowPathIcon,
   EllipsisHorizontalIcon,
   LockClosedIcon,
   LockOpenIcon,
@@ -28,7 +27,7 @@ function ListToolbar(props: Props) {
       handler: () => {},
       disabled: false,
     },
-    { name: "Organize", icon: ArrowPathIcon, handler: () => {} },
+    // { name: "Organize", icon: ArrowPathIcon, handler: () => {} },
     { name: "More", icon: EllipsisHorizontalIcon, handler: () => {} },
   ];
 

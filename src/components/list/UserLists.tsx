@@ -10,7 +10,7 @@ type Props = {
 function UserLists({ lists, username }: Props) {
   return (
     <main className="wrapper">
-      <ul className="grid grid-cols-1 gap-4 ">
+      <ul className="content-grid">
         {lists.map((list) => {
           return (
             <li key={list.id}>
