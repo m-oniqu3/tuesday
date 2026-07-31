@@ -1,33 +1,34 @@
-import { Link, useSearchParams } from "react-router";
-import { createFilmSlug } from "../../utils/createSlug";
-import Button from "../components/Button";
-import FilmPreview from "../components/film/FilmPreview";
-import { useFilmSearch } from "../hooks/useFilmSearch";
+import { Link, useParams } from "react-router";
+import { createFilmSlug } from "../../../utils/createSlug";
+import { useListFilms } from "../../hooks/useListFilms";
+import Button from "../Button";
+import FilmPreview from "../film/FilmPreview";
+import Loading from "../Loading";
 
-function Search() {
-  const [searchParams] = useSearchParams();
+function ListFilms() {
+  const { listSlug } = useParams() as { listSlug: string };
 
-  const query = searchParams.get("q") ?? "";
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useFilmSearch(query);
+  const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useListFilms(listSlug);
 
   const films = data?.pages.flatMap((page) => page.films) ?? [];
 
-  console.log({ films });
+  if (isLoading) {
+    return <Loading />;
+  }
 
   return (
     <div className="wrapper relative">
       <ul className="content-grid">
         {films.map((film) => (
           <li key={film.imdbID}>
-            <Link to={`/film/${createFilmSlug(film.Title, film.imdbID)}`}>
+            <Link to={`/film/${createFilmSlug(film.title, film.imdbID)}`}>
               <FilmPreview
                 key={film.imdbID}
                 film={{
                   id: film.imdbID,
-                  poster: film.Poster,
-                  title: film.Title,
+                  poster: film.poster,
+                  title: film.title,
                 }}
               />
             </Link>
@@ -48,4 +49,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default ListFilms;

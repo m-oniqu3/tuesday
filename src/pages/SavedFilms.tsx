@@ -1,20 +1,20 @@
-import { Link, useSearchParams } from "react-router";
+import { Link } from "react-router";
 import { createFilmSlug } from "../../utils/createSlug";
 import Button from "../components/Button";
 import FilmPreview from "../components/film/FilmPreview";
-import { useFilmSearch } from "../hooks/useFilmSearch";
+import Loading from "../components/Loading";
+import { useSavedFilms } from "../hooks/useSavedFilms";
 
-function Search() {
-  const [searchParams] = useSearchParams();
-
-  const query = searchParams.get("q") ?? "";
-
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
-    useFilmSearch(query);
+function SavedFilms() {
+  const { data, isLoading, isFetchingNextPage, hasNextPage, fetchNextPage } =
+    useSavedFilms();
 
   const films = data?.pages.flatMap((page) => page.films) ?? [];
 
-  console.log({ films });
+  if (isLoading) {
+    return <Loading />;
+  }
+  console.log(films);
 
   return (
     <div className="wrapper relative">
@@ -22,14 +22,7 @@ function Search() {
         {films.map((film) => (
           <li key={film.imdbID}>
             <Link to={`/film/${createFilmSlug(film.Title, film.imdbID)}`}>
-              <FilmPreview
-                key={film.imdbID}
-                film={{
-                  id: film.imdbID,
-                  poster: film.Poster,
-                  title: film.Title,
-                }}
-              />
+              <FilmPreview key={film.imdbID} film={film} />
             </Link>
           </li>
         ))}
@@ -48,4 +41,4 @@ function Search() {
   );
 }
 
-export default Search;
+export default SavedFilms;

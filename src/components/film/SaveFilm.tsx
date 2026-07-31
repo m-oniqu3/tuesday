@@ -101,7 +101,9 @@ function SaveFilm() {
                 font-medium
                 placeholder:text-neutral-500
                 focus:outline-none
+              
               "
+                autoFocus
                 placeholder="Search..."
               />
 

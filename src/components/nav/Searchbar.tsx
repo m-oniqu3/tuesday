@@ -23,7 +23,7 @@ function Searchbar() {
   return (
     <form className="grid grid-cols-[45px_auto_45px]" onSubmit={handleSubmit}>
       <div className="gray flex-center rounded-l-2xl">
-        <FilmIcon className="size-4.5 text-neutral-400" />
+        <FilmIcon className="size-4.5 text-neutral-800" />
       </div>
 
       <input
@@ -39,10 +39,10 @@ function Searchbar() {
         className="gray pr-4 flex-center rounded-r-2xl cursor-pointer"
       >
         {!query ? (
-          <MagnifyingGlassIcon className="size-4 text-neutral-400" />
+          <MagnifyingGlassIcon className="size-4 text-neutral-800" />
         ) : (
           <XMarkIcon
-            className="size-4.5 text-neutral-400"
+            className="size-4.5 text-neutral-800"
             onClick={() => setQuery("")}
           />
         )}

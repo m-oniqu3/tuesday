@@ -70,9 +70,13 @@ function AuthNav() {
               >
                 Create
               </Button>
-              <BookmarkIcon className="size-4.5" />
+
+              <Link to={"/saved"}>
+                <BookmarkIcon className="size-4.5" />
+              </Link>
 
               <Avatar name={profile?.displayName ?? profile?.username} />
+
               <ChevronDownIcon className="size-4.5" />
             </div>
           ) : (

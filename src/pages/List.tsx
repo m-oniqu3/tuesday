@@ -1,5 +1,8 @@
+import { Suspense } from "react";
 import { useParams } from "react-router";
+import ListFilms from "../components/list/ListFilms";
 import ListSummary from "../components/list/ListSummary";
+import Loading from "../components/Loading";
 import { useAuth } from "../hooks/useAuth";
 import { useList } from "../hooks/useList";
 import { useUserByUsername } from "../hooks/useUserByUsername";
@@ -25,8 +28,6 @@ function List() {
     return <p>Loading...</p>;
   }
 
-  console.log(profile);
-
   if (!profile || !list) {
     return <p>List not found</p>;
   }
@@ -38,10 +39,12 @@ function List() {
   }
 
   return (
-    <main>
+    <main className="page">
       <ListSummary summary={list} profile={profile} />
 
-      <section>{/* films */}</section>
+      <Suspense fallback={<Loading />}>
+        <ListFilms />
+      </Suspense>
     </main>
   );
 }

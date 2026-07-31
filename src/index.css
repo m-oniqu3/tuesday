@@ -34,7 +34,8 @@ body {
 
 @layer components {
   .wrapper {
-    @apply w-[95%] mx-auto max-w-5xl
+    @apply w-[95%] mx-auto;
+
   }
 
   .flex-center {
@@ -74,10 +75,11 @@ body {
 
 
   .content-grid {
-    @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-12;
+    /* @apply grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-8 md:grid-cols-3 md:gap-12; */
+    display: grid;
+    gap: 4;
 
-
-    /* grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
 
     @media (min-width: 640px) {
       @apply gap-12;
@@ -93,7 +95,7 @@ body {
 
     @media (min-width: 1536px) {
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    } */
+    }
   }
 
   h1,

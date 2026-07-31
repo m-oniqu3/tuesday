@@ -9,7 +9,7 @@ type Props = {
 function ListPreview({ list }: Props) {
   return (
     <div className="grid grid-cols-[auto_1fr] gap-4 sm:flex sm:flex-col">
-      <div className="gray rounded-3xl h-30 w-20 sm:h-40 sm:w-70 "></div>
+      <div className="gray rounded-3xl h-30 w-20 sm:h-40 sm:w-80 "></div>
 
       <div className=" flex flex-col items-baseline justify-end gap-1 min-w-0 max-w-xs">
         <h3 className="font-medium line-clamp-1 w-full text-sm sm:text-md">

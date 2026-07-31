@@ -2,11 +2,11 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import type { MouseEvent } from "react";
 import { useAuth } from "../../hooks/useAuth";
 import { useModal } from "../../hooks/useModal";
-import type { OmdbFilm } from "../../types/film";
+import type { FilmPreviewData, OmdbFilm } from "../../types/film";
 import { ModalType } from "../../types/modal";
 
 type Props = {
-  film: OmdbFilm;
+  film: FilmPreviewData;
 };
 
 function FilmPreview({ film }: Props) {
@@ -18,7 +18,7 @@ function FilmPreview({ film }: Props) {
       ? (modal.payload as { film: OmdbFilm }).film.imdbID
       : undefined;
 
-  const isActiveFilm = filmId === film.imdbID;
+  const isActiveFilm = filmId === film.id;
   function handleSaveFilmModal(e: MouseEvent) {
     e.preventDefault();
 
@@ -27,7 +27,7 @@ function FilmPreview({ film }: Props) {
   }
   return (
     <figure className="group relative size-full overflow-hidden ">
-      <img src={film.Poster} alt={film.Title} className="w-full aspect-2/3 " />
+      <img src={film.poster} alt={film.title} className="w-full aspect-2/3 " />
 
       <div
         className={`

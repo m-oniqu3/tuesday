@@ -28,10 +28,11 @@ export type OmdbFilmDetails = {
 };
 
 export type SavedFilm = {
-  id: string;
-  collectionId: string;
-  filmId: string;
-  createdAt: Timestamp;
+  imdbID: string;
+  title: string;
+  poster: string;
+  year: string;
+  type: string;
 };
 
 export type SavedFilmState = {
@@ -44,4 +45,10 @@ export type CollectionFilm = {
   collectionId: string;
   filmId: string;
   createdAt: Timestamp;
+};
+
+export type FilmPreviewData = {
+  id: string;
+  title: string;
+  poster: string;
 };

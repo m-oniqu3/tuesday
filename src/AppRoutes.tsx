@@ -7,6 +7,7 @@ import Film from "./pages/Film";
 import Home from "./pages/Home";
 import List from "./pages/List";
 import Profile from "./pages/Profile";
+import SavedFilms from "./pages/SavedFilms";
 import Search from "./pages/Search";
 
 function AppRoutes() {
@@ -28,6 +29,8 @@ function AppRoutes() {
 
         <Route path="/search" element={<Search />} />
         <Route path="/film/:filmSlug" element={<Film />} />
+
+        <Route path="/saved" element={<SavedFilms />} />
       </Route>
       {/* </Route> */}
     </Routes>
